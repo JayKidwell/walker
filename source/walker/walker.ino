@@ -2,14 +2,6 @@
 #include <Servo.h>
 #include <String.h>
 
-// Visual Micro is in vMicro>General>Tutorial Mode
-// 
-/*
-    Name:       walker.ino
-    Created:	8/17/2018 9:20:35 PM
-    Author:     LAPTOP-FPUPHV09\jay
-*/
-
 // Define User Types below here or use a .h file
 //
 

@@ -14,28 +14,28 @@ class Joint {
 private:
   //
   // -- name of this joint
-  //char _name[];
-  String _name;
+  String name;
+  //char name[];
   //
   // -- servo position values (actual values sent to servo)
-  int _rangeMin;
-  int _rangeMax;
+  int rangeMin;
+  int rangeMax;
   //
   // -- current virtual position 0...99, scaled to rangeMin...rangeMax
-  float _positionCurrent;
+  float positionCurrent;
   //
   // -- desired virtual position 0...99, scaled to rangeMin...rangeMax
-  float _targetPosition;
+  float targetPosition;
   //
   // -- unit step for position
-  float _speed;
+  float moveSpeed;
   //
   // -- servo controller
-  Servo _myservo;
+  Servo myservo;
 public:
   //
   // -- constructor
-  Joint(char name[], int servoPin, int rangeMin, int rangeMax);
+  Joint(String name, int servoPin, int rangeMin, int rangeMax);
   //
   // -- move joint
   void move(float position, float speed);
@@ -45,6 +45,7 @@ public:
   //
   // The continuous loop() function
   public: void loop();
+};
 //
 #endif // Joint_h define
 
