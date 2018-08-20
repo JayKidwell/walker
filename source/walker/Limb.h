@@ -3,6 +3,7 @@
   /
   Limbs do one thing at at time. 
   You send an instruction and they execute instructions on the joints to satisfy the limb instuction.
+  Limb is controlled in x,y,z coordinate space, but controls joints in a joint-angle space
   Coordinate system:
     x in mm, front-to-back, front is positive x, 0 is at the shoulder joint
     y in mm, left-to-right, left is position, 0 is at the shoulder joint
@@ -17,6 +18,7 @@
 #define Limb_h
 
 #include "Arduino.h"
+#include "Constants.h"
 #include "Joint.h"
 #include <String.h>
 /*
@@ -31,12 +33,17 @@ private:
   // -- joints
   Joint wrist;
   Joint elbow;
-  join shoulder;
+  Joint shoulder;
   //
   // -- current hand position
-  int handx;
-  int handy;
-  int handz;
+  int handCurrentX;
+  int handCurrentY;
+  int handCurrentZ;
+  //
+  // -- target hand position
+  int handTargetX;
+  int handTargetY;
+  int handTargetZ;
 public:
   //
   // -- constructor

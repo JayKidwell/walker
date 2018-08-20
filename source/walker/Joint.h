@@ -5,6 +5,8 @@
 #define Joint_h
 
 #include "Arduino.h"
+#include "Constants.h"
+#include "Limb.h"
 #include <Servo.h>
 #include <String.h>
 /*

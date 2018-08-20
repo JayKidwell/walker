@@ -1,5 +1,6 @@
 
 #include "Arduino.h"
+#include "Constants.h"
 #include "Joint.h"
 #include "Limb.h"
 #include <Servo.h>
@@ -10,52 +11,24 @@ Limb::Limb(String name, int servoPinWrist, int servoPinElbow, int servoPinShould
   //
   // -- initialize state
   this->name = name;
-  this->rangeMin = rangeMin;
-  this->rangeMax = rangeMax;
   //
   // -- create joints
-  wrist = new Joint(String name, int servoPin, int rangeMin, int rangeMax);
+  wrist = new Joint( name + "-wrist", servoPinWrist, WRIST_RANGE_MIN, WRIST_RANGE_MAX )
+  elbow = new Joint( name + "-elbow", servoPinElbow, ELBOW_RANGE_MIN, ELBOW_RANGE_MAX )
+  shoulder = new Joint( name + "-shoulder", servoPinShoulder, SHOULDER_RANGE_MIN, SHOULDER_RANGE_MAX )
 };
-//
-// -- move joint
-//
-void Joint::move(float position, float speed) {
   //
-  // -- set target position and speed
-  if (position < 0) {
-    targetPosition = 0;
-  } else if (position > 99) {
-    targetPosition = 99;
-  } else {
-    targetPosition = position;
+  // -- move hand to the coordinte during the durationMsec time. x,y,z are in mm with respect to the shoulder joint (0,0,0) is the joint.
+void moveHandLinear(int x, int y, int z, int durationMsec) {
+  //
+  // -- debug
+  Serial.println("limb[" + name + "].moveHandLinear(" + x + "," + y + "," + z + "," + durationMsec + ")");
   }
-  if (speed < 0) {
-    moveSpeed = 0;
-  } else if (speed > 99) {
-    moveSpeed = 99;
-  } else {
-    moveSpeed = speed;
-  }
-};
-void Joint::loop() {
-  if (positionCurrent != targetPosition) {
-    //
-    // -- calculate new position
-    if (positionCurrent < targetPosition) {
-      positionCurrent += moveSpeed;
-      if (positionCurrent > targetPosition) positionCurrent = targetPosition;
-    } else {
-      positionCurrent -= moveSpeed;
-      if (positionCurrent < targetPosition) positionCurrent = targetPosition;
-    }
-    //
-    // -- move joint to position, simple linear motion
-    int currentServoValue = int(rangeMin + (((rangeMax - rangeMin) * positionCurrent) / 100.0));
-    //myservo.write(currentServoValue);
-    //
-    // -- debug
-    Serial.println("update(), currentServoValue [" + String(currentServoValue) + "], positionCurrent [" + String(positionCurrent) + "], speed [" + String(moveSpeed) + "], targetPosition [" + String(targetPosition) + "]");
-  }
+void Limb::loop() {
+  //
+  // -- debug
+  Serial.println("limb[" + name + "].loop");
 }
+
 
 

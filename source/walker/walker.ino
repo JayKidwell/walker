@@ -1,6 +1,7 @@
 
 #include <Servo.h>
 #include <String.h>
+#include "Constants.h"
 
 // Define User Types below here or use a .h file
 //

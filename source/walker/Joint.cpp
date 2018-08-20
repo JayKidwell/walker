@@ -1,5 +1,6 @@
 
 #include "Arduino.h"
+#include "Constants.h"
 #include "Joint.h"
 #include <Servo.h>
 #include <String.h>
@@ -54,7 +55,7 @@ void Joint::loop() {
     //myservo.write(currentServoValue);
     //
     // -- debug
-    Serial.println("update(), currentServoValue [" + String(currentServoValue) + "], positionCurrent [" + String(positionCurrent) + "], speed [" + String(moveSpeed) + "], targetPosition [" + String(targetPosition) + "]");
+    Serial.println("loop(), currentServoValue [" + String(currentServoValue) + "], positionCurrent [" + String(positionCurrent) + "], speed [" + String(moveSpeed) + "], targetPosition [" + String(targetPosition) + "]");
   }
 }
 
