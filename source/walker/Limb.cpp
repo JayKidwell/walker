@@ -7,7 +7,7 @@
 #include <String.h>
 //
 // -- Limb Constructor
-Limb::Limb(String name, int servoPinWrist, int servoPinElbow, int servoPinShoulder); {
+Limb::Limb(String name, int servoPinWrist, int servoPinElbow, int servoPinShoulder) {
   //
   // -- initialize state
   this->name = name;
