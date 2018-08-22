@@ -47,13 +47,13 @@ private:
 public:
   //
   // -- constructor
-  Limb(String name, int servoPinWrist, int servoPinElbow, int servoPinShoulder);
+  Limb();
   //
   // -- move hand to the coordinte during the durationMsec time. x,y,z are in mm with respect to the shoulder joint (0,0,0) is the joint.
   void moveHandLinear(int x, int y, int z, int durationMsec);
   //
   // The setup() function runs once each time the micro-controller starts
-  public: void setup();
+  public: void setup(String name, int servoPinWrist, int servoPinElbow, int servoPinShoulder);
   //
   // The continuous loop() function
   public: void loop();

@@ -7,15 +7,17 @@
 //
 // -- Joint constructor
 //
-Joint::Joint(String name, int servoPin, int rangeMin, int rangeMax) {
-  //
-  // -- initialize state
-  this->name = name;
-  this->rangeMin = rangeMin;
-  this->rangeMax = rangeMax;
+Joint::Joint() {};
+//
+// -- Joint setup
+//
+void Joint::setup(String jointName, int jointServoPin, int jointRangeMin, int jointRangeMax){
+  name = jointName;
+  rangeMin = jointRangeMin;
+  rangeMax = jointRangeMax;
   //
   // -- attach servo
-  myservo.attach(servoPin);
+  myservo.attach( jointServoPin );
 };
 //
 // -- move joint

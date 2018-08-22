@@ -16,7 +16,6 @@ private:
   //
   // -- name of this joint
   String name;
-  //char name[];
   //
   // -- servo position values (actual values sent to servo)
   int rangeMin;
@@ -36,16 +35,16 @@ private:
 public:
   //
   // -- constructor
-  Joint(String name, int servoPin, int rangeMin, int rangeMax);
+  Joint();
   //
   // -- move joint
   void move(float position, float speed);
   //
   // The setup() function runs once each time the micro-controller starts
-  public: void setup();
+  void setup(String jointName, int jointServoPin, int jointRangeMin, int jointRangeMax);
   //
   // The continuous loop() function
-  public: void loop();
+  void loop();
 };
 //
 #endif // Joint_h define
