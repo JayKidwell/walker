@@ -22,10 +22,10 @@ private:
   String name;
   //
   // -- limbs
-  Limb front-right;
-  Limb front-left;
-  Limb back-right;
-  Limb back-left;
+  Limb frontRightLimb;
+  Limb frontLeftLimb;
+  Limb backRightLimb;
+  Limb backLeftLimb;
   //
   // -- current position
   int bodyCurrentX;
@@ -41,8 +41,14 @@ public:
   // -- constructor
   Body();
   //
+  // -- sit the body, moving the body down to 0,0,0
+  void sit();
+  //
+  // -- stand the body, moving it up to 0, 0, 
+  void stand();
+  //
   // -- move body to the coordinte during the durationMsec time. x,y,z are in mm with respect to center between front shoulder joint (0,0,0).
-  void moveLinear(int x, int y, int z, int durationMsec);
+  void walk(int x, int y, int durationMsec);
   //
   // The setup() function runs once each time the micro-controller starts
   public: void setup(String name);
