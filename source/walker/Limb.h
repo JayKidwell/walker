@@ -1,18 +1,5 @@
 /*
   Limb.h - Library for managing three joints for each arm
-  /
-  Limbs do one thing at at time. 
-  You send an instruction and they execute instructions on the joints to satisfy the limb instuction.
-  Limb is controlled in x,y,z coordinate space, but controls joints in a joint-angle space
-  Coordinate system:
-    x in mm, front-to-back, front is positive x, 0 is at the shoulder joint
-    y in mm, left-to-right, left is position, 0 is at the shoulder joint
-    z in mm, top-to-bottom, top is positive, 0 is at the shoulder joint
-  instuctions:
-    moveHandLinear( x, y, z, duration ) 
-      - move the tip of the hand to this position in mm wrt the shoulder joint
-    (more later)
-  
 */
 #ifndef Limb_h
 #define Limb_h

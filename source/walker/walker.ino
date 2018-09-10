@@ -6,7 +6,10 @@
 
 // Define User Types below here or use a .h file
 //
-Body walker;
+Body walkerBody;
+//
+// -- loop counter to simulate motion during development
+int loopCnt;
 
 
 // Define Function Prototypes that use User Types below here or use a .h file
@@ -17,24 +20,23 @@ Body walker;
 //
 
 // The setup() function runs once each time the micro-controller starts
-void setup()
-{
-  walker = Body();
-  walker.setup( "walker1" );
-  delay( 1000 );
-  
-  walker.sit();
-  delay( 1000 );
-  
-  walker.stand();
-  delay( 1000 );
-  
-  walker.sit();
+void setup(){
+  walkerBody = Body();
+  walkerBody.setup( "walker1" );
+  //
+  // -- initialize
+  loopCnt = 0;
 }
 
 // Add the main program code into the continuous loop() function
-void loop()
-{
-
-
+void loop(){
+  if (loopCnt == 0) {
+    walkerBody.sit();
+  } else if ( loopCnt == 1000 ) {
+    walkerBody.stand();
+  } else if ( loopCnt == 2000 ) {
+    loopCnt = -1;
+  }
+  walkerBody.loop();
+  loopCnt++;
 }

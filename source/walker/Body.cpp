@@ -51,6 +51,10 @@ void Body::loop() {
   //
   // -- debug
   Serial.println("body[" + name + "].loop");
+  frontRightLimb.loop();
+  frontLeftLimb.loop();
+  backRightLimb.loop();
+  backLeftLimb.loop();
 }
 
 
