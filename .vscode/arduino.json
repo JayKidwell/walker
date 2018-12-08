@@ -1,0 +1,5 @@
+{
+    "board": "arduino:sam:arduino_due_x_dbg",
+    "sketch": "source\\walker\\walker.ino",
+    "port": "COM4"
+}

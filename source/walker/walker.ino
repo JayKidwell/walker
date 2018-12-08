@@ -3,29 +3,22 @@
 #include <String.h>
 #include "Constants.h"
 #include "Body.h"
-
 // Define User Types below here or use a .h file
 //
 Body walkerBody;
 //
 // -- loop counter to simulate motion during development
 int loopCnt;
-
-
-// Define Function Prototypes that use User Types below here or use a .h file
 //
-
-
-// Define Functions below here or use other .ino or cpp files
-//
-
 // The setup() function runs once each time the micro-controller starts
 void setup(){
-  walkerBody = Body();
-  walkerBody.setup( "walker1" );
-  //
-  // -- initialize
-  loopCnt = 0;
+    Serial.begin( 9600 );
+    Serial.println("123412341243");
+    walkerBody = Body();
+    walkerBody.setup( "walker1" );
+    //
+    // -- initialize
+    loopCnt = 0;
 }
 
 // Add the main program code into the continuous loop() function
