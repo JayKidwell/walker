@@ -16,7 +16,9 @@
 */
 #ifndef constants_h
 #define constants_h
-
+//
+// -- Seial Monitor Baud rate
+const int SerialBaudRate = 9600;
 //
 // -- wrist min value sent to servo
 const int WRIST_RANGE_MIN = 20;

@@ -41,6 +41,9 @@ void Joint::move(float position, float speed) {
   }
 };
 void Joint::loop() {
+  //
+  // -- debug
+  Serial.println("joint[" + name + "].loop");
   if (positionCurrent != targetPosition) {
     //
     // -- calculate new position
@@ -60,5 +63,3 @@ void Joint::loop() {
     Serial.println("loop(), currentServoValue [" + String(currentServoValue) + "], positionCurrent [" + String(positionCurrent) + "], speed [" + String(moveSpeed) + "], targetPosition [" + String(targetPosition) + "]");
   }
 }
-
-

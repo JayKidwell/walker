@@ -18,10 +18,10 @@ void Limb::setup(String limbName, int limbServoPinWrist, int limbServoPinElbow, 
   // -- create joints
   wrist = Joint();
   wrist.setup( limbName + "-wrist", limbServoPinWrist, WRIST_RANGE_MIN, WRIST_RANGE_MAX );
-  elbow = Joint();
-  elbow.setup( limbName + "-elbow", limbServoPinElbow, ELBOW_RANGE_MIN, ELBOW_RANGE_MAX );
-  shoulder = Joint();
-  shoulder.setup( limbName + "-shoulder", limbServoPinShoulder, SHOULDER_RANGE_MIN, SHOULDER_RANGE_MAX );
+//  elbow = Joint();
+//  elbow.setup( limbName + "-elbow", limbServoPinElbow, ELBOW_RANGE_MIN, ELBOW_RANGE_MAX );
+//  shoulder = Joint();
+//  shoulder.setup( limbName + "-shoulder", limbServoPinShoulder, SHOULDER_RANGE_MIN, SHOULDER_RANGE_MAX );
 };
   //
   // -- move hand to the coordinte during the durationMsec time. x,y,z are in mm with respect to the shoulder joint (0,0,0) is the joint.
@@ -34,7 +34,7 @@ void Limb::loop() {
   //
   // -- debug
   Serial.println("limb[" + name + "].loop");
+  wrist.loop();
+  //elbow.loop();
+  //shoulder.loop();
 }
-
-
-

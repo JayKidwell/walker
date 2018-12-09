@@ -12,24 +12,27 @@ int loopCnt;
 //
 // The setup() function runs once each time the micro-controller starts
 void setup(){
-    Serial.begin( 9600 );
-    Serial.println("123412341243");
+    Serial.begin( SerialBaudRate );
+    Serial.println("Walker setup...");
     walkerBody = Body();
     walkerBody.setup( "walker1" );
     //
     // -- initialize
     loopCnt = 0;
+    Serial.println("exit setup");
 }
 
 // Add the main program code into the continuous loop() function
 void loop(){
-  if (loopCnt == 0) {
-    walkerBody.sit();
-  } else if ( loopCnt == 1000 ) {
-    walkerBody.stand();
-  } else if ( loopCnt == 2000 ) {
-    loopCnt = -1;
-  }
-  walkerBody.loop();
-  loopCnt++;
+    if (loopCnt == 0) {
+        Serial.println("loopCnt=0");
+        walkerBody.sit();
+    } else if ( loopCnt == 1000 ) {
+        walkerBody.stand();
+    } else if ( loopCnt == 2000 ) {
+        loopCnt = -1;
+    }
+    walkerBody.loop();
+    loopCnt++;
+    delay(1000);
 }

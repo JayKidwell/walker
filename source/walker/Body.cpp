@@ -19,12 +19,12 @@ void Body::setup(String bodyName) {
   // -- create limbs
   frontRightLimb = Limb();
   frontRightLimb.setup( name + "-frontRightLimb", servoPinFrontRightWrist, servoPinFrontRightElbow, servoPinFrontRightShoulder );
-  frontLeftLimb = Limb();
-  frontLeftLimb.setup( name + "-frontLeftLimb", servoPinFrontLeftWrist, servoPinFrontLeftElbow, servoPinFrontLeftShoulder );
-  backRightLimb = Limb();
-  backRightLimb.setup( name + "-backRightLimb", servoPinBackRightWrist, servoPinBackRightElbow, servoPinBackRightShoulder );
-  backLeftLimb = Limb();
-  backLeftLimb.setup( name + "-backLeftLimb", servoPinBackLeftWrist, servoPinBackLeftElbow, servoPinBackLeftShoulder );  
+//  frontLeftLimb = Limb();
+//  frontLeftLimb.setup( name + "-frontLeftLimb", servoPinFrontLeftWrist, servoPinFrontLeftElbow, servoPinFrontLeftShoulder );
+//  backRightLimb = Limb();
+//  backRightLimb.setup( name + "-backRightLimb", servoPinBackRightWrist, servoPinBackRightElbow, servoPinBackRightShoulder );
+//  backLeftLimb = Limb();
+//  backLeftLimb.setup( name + "-backLeftLimb", servoPinBackLeftWrist, servoPinBackLeftElbow, servoPinBackLeftShoulder );  
 };
 //
 // -- sit
@@ -52,10 +52,7 @@ void Body::loop() {
   // -- debug
   Serial.println("body[" + name + "].loop");
   frontRightLimb.loop();
-  frontLeftLimb.loop();
-  backRightLimb.loop();
-  backLeftLimb.loop();
+  //frontLeftLimb.loop();
+  //backRightLimb.loop();
+  //backLeftLimb.loop();
 }
-
-
-
