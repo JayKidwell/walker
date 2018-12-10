@@ -17,25 +17,35 @@ private:
   // -- name of this joint
   String name;
   //
-  // -- servo position values (actual values sent to servo)
-  int rangeMin;
-  int rangeMax;
+  // -- servo angle limits set in constructor
+  int servoAngleMin;
+  int servoAngleMax;
   //
-  // -- current virtual position 0...99, scaled to rangeMin...rangeMax
-  float positionCurrent;
+  // -- current servo angle 0...180
+  float servoAngleCurrent;
   //
-  // -- desired virtual position 0...99, scaled to rangeMin...rangeMax
-  float targetPosition;
+  // -- desired servo angle, 0...180
+  float servoAngleTarget;
   //
   // -- unit step for position
-  float moveSpeed;
+  float moveSpeedDegreesPerSecond;
+  //
+  // -- the millisecond time that the last loop started (used to calculate loop period)
+  unsigned long lastLoopTimeMs;
   //
   // -- servo controller
   Servo myservo;
+  //
+  // -- true if the last movement command is complete
+  bool _commandComplete;
+
 public:
   //
   // -- constructor
   Joint();
+  //
+  // -- return true/false if the previous command is complete.
+  bool commandComplete();
   //
   // -- move joint
   void move(float position, float speed);

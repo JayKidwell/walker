@@ -21,8 +21,8 @@ void setup(){
     loopCnt = 0;
     Serial.println("exit setup");
 }
-
-// Add the main program code into the continuous loop() function
+//
+// -- send instructions to body and call sub objects
 void loop(){
     if (loopCnt == 0) {
         Serial.println("loopCnt=0");

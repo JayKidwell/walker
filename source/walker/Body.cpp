@@ -10,6 +10,7 @@
 // -- Limb Constructor
 Body::Body() {};
 //
+// ====================================================================================================
 // -- Limb setup
 void Body::setup(String bodyName) {
   //
@@ -27,6 +28,7 @@ void Body::setup(String bodyName) {
 //  backLeftLimb.setup( name + "-backLeftLimb", servoPinBackLeftWrist, servoPinBackLeftElbow, servoPinBackLeftShoulder );  
 };
 //
+// ====================================================================================================
 // -- sit
 void Body::sit() {
   //
@@ -34,6 +36,7 @@ void Body::sit() {
   Serial.println("body[" + name + "].sit()");
 }
 //
+// ====================================================================================================
 // -- stand
 void Body::stand() {
   //
@@ -41,12 +44,23 @@ void Body::stand() {
   Serial.println("body[" + name + "].stand()");
 }
 //
+// ====================================================================================================
 // -- walk
 void Body::walk(int x, int y, int durationMsec) {
   //
   // -- debug
   Serial.println("body[" + name + "].walk(x:" + x + ", y:" + y + ", " + durationMsec + " msec)");
 }
+//
+// ====================================================================================================
+// -- true if all objects have finished thier movement instructions
+bool Body::commandComplete() {
+    return frontRightLimb.commandComplete();
+    //return frontRightLimb.commandComplete() && frontLeftLimb.commandComplete() && backRightLimb.commandComplete() && backLeftLimb.commandComplete();
+}
+//
+// ====================================================================================================
+// -- execute this objects micro-movement and call sub objects
 void Body::loop() {
   //
   // -- debug

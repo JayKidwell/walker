@@ -41,6 +41,10 @@ public:
   // -- constructor
   Body();
   //
+  // -- return true/false if the previous command is complete.
+  // -- commands are executed in microsteps with each loop call
+  bool commandComplete();
+  //
   // -- sit the body, moving the body down to 0,0,0
   void sit();
   //

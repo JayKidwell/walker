@@ -36,6 +36,9 @@ public:
   // -- constructor
   Limb();
   //
+  // -- return true/false if the previous command is complete.
+  bool commandComplete();
+  //
   // -- move hand to the coordinte during the durationMsec time. x,y,z are in mm with respect to the shoulder joint (0,0,0) is the joint.
   void moveHandLinear(int x, int y, int z, int durationMsec);
   //
