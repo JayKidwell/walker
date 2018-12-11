@@ -48,7 +48,7 @@ public:
   bool commandComplete();
   //
   // -- move joint
-  void move(float position, float speed);
+  void move(float desiredServoAngle, float DegreesPerSecond);
   //
   // The setup() function runs once each time the micro-controller starts
   void setup(String jointName, int jointServoPin, int jointRangeMin, int jointRangeMax);

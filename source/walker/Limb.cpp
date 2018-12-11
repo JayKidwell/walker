@@ -18,11 +18,11 @@ void Limb::setup(String limbName, int limbServoPinWrist, int limbServoPinElbow, 
   //
   // -- create joints
   wrist = Joint();
-  wrist.setup( limbName + "-wrist", limbServoPinWrist, WRIST_RANGE_MIN, WRIST_RANGE_MAX );
-  //elbow = Joint();
-  //elbow.setup( limbName + "-elbow", limbServoPinElbow, ELBOW_RANGE_MIN, ELBOW_RANGE_MAX );
-  //shoulder = Joint();
-  //shoulder.setup( limbName + "-shoulder", limbServoPinShoulder, SHOULDER_RANGE_MIN, SHOULDER_RANGE_MAX );
+  wrist.setup( limbName + "-wrist", limbServoPinWrist, WRIST_ANGLE_MIN, WRIST_ANGLE_MAX );
+  elbow = Joint();
+  elbow.setup( limbName + "-elbow", limbServoPinElbow, ELBOW_ANGLE_MIN, ELBOW_ANGLE_MAX );
+  shoulder = Joint();
+  shoulder.setup( limbName + "-shoulder", limbServoPinShoulder, SHOULDER_ANGLE_MIN, SHOULDER_ANGLE_MAX );
 };
 //
 // ====================================================================================================
@@ -30,10 +30,9 @@ void Limb::setup(String limbName, int limbServoPinWrist, int limbServoPinElbow, 
 void Limb::loop() {
   //
   // -- debug
-  Serial.println("limb[" + name + "].loop");
   wrist.loop();
-  //elbow.loop();
-  //shoulder.loop();
+  elbow.loop();
+  shoulder.loop();
 }
 //
 // ====================================================================================================

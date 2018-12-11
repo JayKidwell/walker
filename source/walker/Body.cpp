@@ -13,13 +13,13 @@ Body::Body() {};
 // ====================================================================================================
 // -- Limb setup
 void Body::setup(String bodyName) {
-  //
-  // -- initialize state
-  name = bodyName;
-  //
-  // -- create limbs
-  frontRightLimb = Limb();
-  frontRightLimb.setup( name + "-frontRightLimb", servoPinFrontRightWrist, servoPinFrontRightElbow, servoPinFrontRightShoulder );
+    //
+    // -- initialize state
+    name = bodyName;
+    //
+    // -- create limbs
+    frontRightLimb = Limb();
+    frontRightLimb.setup( name + "-frontRightLimb", servoPinFrontRightWrist, servoPinFrontRightElbow, servoPinFrontRightShoulder );
 //  frontLeftLimb = Limb();
 //  frontLeftLimb.setup( name + "-frontLeftLimb", servoPinFrontLeftWrist, servoPinFrontLeftElbow, servoPinFrontLeftShoulder );
 //  backRightLimb = Limb();
@@ -29,27 +29,36 @@ void Body::setup(String bodyName) {
 };
 //
 // ====================================================================================================
+// -- debug, move wrist
+/* void Body::moveWrist(float desiredServoAngle, float degreesPerSecond) {
+    //
+    // -- debug
+    Serial.println("body[" + name + "].moveWrist()");
+    frontRightLimb.moveWrist( desiredServoAngle, degreesPerSecond);
+}
+ *///
+// ====================================================================================================
 // -- sit
 void Body::sit() {
-  //
-  // -- debug
-  Serial.println("body[" + name + "].sit()");
+    //
+    // -- debug
+    Serial.println("body[" + name + "].sit()");
 }
 //
 // ====================================================================================================
 // -- stand
 void Body::stand() {
-  //
-  // -- debug
-  Serial.println("body[" + name + "].stand()");
+    //
+    // -- debug
+    Serial.println("body[" + name + "].stand()");
 }
 //
 // ====================================================================================================
 // -- walk
 void Body::walk(int x, int y, int durationMsec) {
-  //
-  // -- debug
-  Serial.println("body[" + name + "].walk(x:" + x + ", y:" + y + ", " + durationMsec + " msec)");
+    //
+    // -- debug
+    Serial.println("body[" + name + "].walk(x:" + x + ", y:" + y + ", " + durationMsec + " msec)");
 }
 //
 // ====================================================================================================
@@ -62,11 +71,10 @@ bool Body::commandComplete() {
 // ====================================================================================================
 // -- execute this objects micro-movement and call sub objects
 void Body::loop() {
-  //
-  // -- debug
-  Serial.println("body[" + name + "].loop");
-  frontRightLimb.loop();
-  //frontLeftLimb.loop();
-  //backRightLimb.loop();
-  //backLeftLimb.loop();
+    //
+    // -- debug
+    frontRightLimb.loop();
+    //frontLeftLimb.loop();
+    //backRightLimb.loop();
+    //backLeftLimb.loop();
 }

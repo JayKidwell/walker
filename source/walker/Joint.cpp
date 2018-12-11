@@ -44,6 +44,7 @@ void Joint::setup(String jointName, int jointServoPin, int jointServoAngleMin, i
 void Joint::move(float desiredServoAngle, float DegreesPerSecond) {
     //
     // -- start a new command
+    Serial.println("joint[" + name + "].move, desiredServoAngle [" + String(desiredServoAngle) + "], DegreesPerSecond [" + String(DegreesPerSecond) + "]");
     _commandComplete = false;
     //
     // -- set target desiredServoAngle and DegreesPerSecond
@@ -72,7 +73,12 @@ void Joint::loop() {
     unsigned long millisecondsPerLoop = timeMs - lastLoopTimeMs;
 
     if (servoAngleCurrent == servoAngleTarget) {
-        _commandComplete = true;
+        //
+        // -- move is complete
+        if (!_commandComplete) {
+            Serial.println("joint[" + name + "].loop(), commandComplete, servoAngleTarget [" + String(servoAngleTarget) + "]");
+            _commandComplete = true;
+        }
     } else {
         //
         // -- calculate moveSpeedDegreesPerLoop
@@ -80,18 +86,20 @@ void Joint::loop() {
         //
         // -- calculate new servoAngleCurrent
         if (servoAngleCurrent < servoAngleTarget) {
+            Serial.println("joint[" + name + "].loop(), move up, servoAngleTarget [" + String(servoAngleTarget) + "], servoAngleCurrent [" + String(servoAngleCurrent) + "], millisecondsPerLoop [" + String(millisecondsPerLoop) + "], moveSpeedDegreesPerLoop [" + String(moveSpeedDegreesPerLoop) + "]");
             servoAngleCurrent += moveSpeedDegreesPerLoop;
             if (servoAngleCurrent > servoAngleTarget) servoAngleCurrent = servoAngleTarget;
         } else {
+            Serial.println("joint[" + name + "].loop(), move down, servoAngleTarget [" + String(servoAngleTarget) + "], servoAngleCurrent [" + String(servoAngleCurrent) + "], millisecondsPerLoop [" + String(millisecondsPerLoop) + "], moveSpeedDegreesPerLoop [" + String(moveSpeedDegreesPerLoop) + "]");
             servoAngleCurrent -= moveSpeedDegreesPerSecond;
             if (servoAngleCurrent < servoAngleTarget) servoAngleCurrent = servoAngleTarget;
         }
         //
         // -- move joint to new servoAngleCurrent, simple linear motion
-        //myservo.write(servoAngleCurrent);
+        myservo.write(servoAngleCurrent);
         //
-        // -- debug
-        Serial.println("joint[" + name + "].loop(), servoAngleTarget [" + String(servoAngleTarget) + "], servoAngleCurrent [" + String(servoAngleCurrent) + "], millisecondsPerLoop [" + String(millisecondsPerLoop) + "], moveSpeedDegreesPerLoop [" + String(moveSpeedDegreesPerLoop) + "]");
+        // -- set time for next loop
+        lastLoopTimeMs = timeMs;
     }
 }
 //
