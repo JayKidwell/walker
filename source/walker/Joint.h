@@ -6,7 +6,8 @@
 
 #include "Arduino.h"
 #include "Constants.h"
-#include <Servo.h>
+#include <VarSpeedServo.h>
+//#include <Servo.h>
 #include <String.h>
 /*
 * A single join in a limb
@@ -34,7 +35,7 @@ private:
   unsigned long lastLoopTimeMs;
   //
   // -- servo controller
-  Servo myservo;
+  VarSpeedServo  myservo;
   //
   // -- true if the last movement command is complete
   bool _commandComplete;
@@ -51,11 +52,10 @@ public:
   void move(float desiredServoAngle, float DegreesPerSecond);
   //
   // The setup() function runs once each time the micro-controller starts
-  void setup(String jointName, int jointServoPin, int jointRangeMin, int jointRangeMax);
+  void setup(String jointName, int jointservoChannel, int jointRangeMin, int jointRangeMax);
   //
   // The continuous loop() function
   void loop();
 };
 //
 #endif // Joint_h define
-

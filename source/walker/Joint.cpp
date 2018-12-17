@@ -2,7 +2,8 @@
 #include "Arduino.h"
 #include "Constants.h"
 #include "Joint.h"
-#include <Servo.h>
+#include <VarSpeedServo.h>
+//#include <Servo.h>
 #include <String.h>
 //
 // -- Joint constructor
@@ -11,7 +12,7 @@ Joint::Joint() {};
 //
 // ====================================================================================================
 // -- Joint setup
-void Joint::setup(String jointName, int jointServoPin, int jointServoAngleMin, int jointServoAngleMax){
+void Joint::setup(String jointName, int jointservoChannel, int jointServoAngleMin, int jointServoAngleMax){
     lastLoopTimeMs = millis();
     name = jointName;
     if ( jointServoAngleMin < 0 ) {  
@@ -30,7 +31,7 @@ void Joint::setup(String jointName, int jointServoPin, int jointServoAngleMin, i
     }
     //
     // -- attach servo
-    myservo.attach( jointServoPin );
+    myservo.attach( jointservoChannel );
 };
 //
 // ====================================================================================================
@@ -108,3 +109,27 @@ void Joint::loop() {
 bool Joint::commandComplete() {
     return _commandComplete;
 };
+//
+// ====================================================================================================
+// -- from adafruit pwm servo example
+//    
+void setServoPulse(uint8_t n, double pulse) {
+  double pulselength;
+  // 1,000,000 us per second, 60Hz
+  pulselength = 1000000;   
+  pulselength /= 60;
+  Serial.print(pulselength); 
+  Serial.println(" us per period"); 
+  //
+  // 12 bits of resolution
+  pulselength /= 4096;  
+  Serial.print(pulselength); 
+  Serial.println(" us per bit"); 
+  //
+  // convert to us
+  pulse *= 1000000;  
+  pulse /= pulselength;
+  Serial.println(pulse);
+  pwm.setPWM(n, 0, pulse);
+}
+

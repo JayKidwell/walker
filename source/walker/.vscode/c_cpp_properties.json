@@ -6,7 +6,8 @@
                 "C:\\Users\\jay\\AppData\\Local\\Arduino15\\packages\\arduino\\tools\\**",
                 "C:\\Users\\jay\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\sam\\1.6.11\\**",
                 "${workspaceFolder}/**",
-                "C:\\Program Files (x86)\\Arduino\\libraries\\**"
+                "C:\\Program Files (x86)\\Arduino\\libraries\\**",
+                "C:\\Users\\jay\\Documents\\Arduino\\libraries\\**"
             ],
             "defines": [
                 "_DEBUG",

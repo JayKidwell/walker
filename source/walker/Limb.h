@@ -43,7 +43,7 @@ class Limb {
         void moveHandLinear(int x, int y, int z, int durationMsec);
         //
         // The setup() function runs once each time the micro-controller starts
-        public: void setup(String name, int servoPinWrist, int servoPinElbow, int servoPinShoulder);
+        public: void setup(String name, int servoChannelWrist, int servoChannelElbow, int servoChannelShoulder);
         //
         // The continuous loop() function
         public: void loop();

@@ -17,6 +17,19 @@
 #ifndef constants_h
 #define constants_h
 //
+// -- adaFruit pcs9685 pulse width modulation library (to drive servos)
+// Depending on your servo make, the pulse width min and max may vary, you 
+// want these to be as small/large as possible without hitting the hard stop
+// for max range. You'll have to tweak them as necessary to match the servos you have!
+//
+// this is the 'minimum' pulse length count (out of 4096)
+#define SERVOMIN  150 
+//
+// this is the 'maximum' pulse length count (out of 4096)
+#define SERVOMAX  600 
+
+
+//
 // -- Seial Monitor Baud rate
 const int SerialBaudRate = 9600;
 //
@@ -48,18 +61,18 @@ const int SHOULDER_ANGLE_MAX = 160;
 const int SHOULDER_ANGLE_PARK = 120;
 //
 // -- arduino pin numbers for each servo
-const int servoPinFrontLeftWrist      = 1;
-const int servoPinFrontLeftElbow      = 2;
-const int servoPinFrontLeftShoulder   = 3;
-const int servoPinFrontRightWrist     = 4;
-const int servoPinFrontRightElbow     = 5;
-const int servoPinFrontRightShoulder  = 6;
-const int servoPinBackLeftWrist       = 7;
-const int servoPinBackLeftElbow       = 8;
-const int servoPinBackLeftShoulder    = 9;
-const int servoPinBackRightWrist      = 10;
-const int servoPinBackRightElbow      = 11;
-const int servoPinBackRightShoulder   = 12;
+const int servoChannelFrontLeftWrist      = 0;
+const int servoChannelFrontLeftElbow      = 1;
+const int servoChannelFrontLeftShoulder   = 2;
+const int servoChannelFrontRightWrist     = 3;
+const int servoChannelFrontRightElbow     = 4;
+const int servoChannelFrontRightShoulder  = 5;
+const int servoChannelBackLeftWrist       = 6;
+const int servoChannelBackLeftElbow       = 7;
+const int servoChannelBackLeftShoulder    = 8;
+const int servoChannelBackRightWrist      = 9;
+const int servoChannelBackRightElbow      = 10;
+const int servoChannelBackRightShoulder   = 11;
 
 
 #endif // constants_h define

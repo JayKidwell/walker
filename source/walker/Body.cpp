@@ -4,7 +4,8 @@
 #include "Joint.h"
 #include "Limb.h"
 #include "Body.h"
-#include <Servo.h>
+#include <VarSpeedServo.h>
+//#include <Servo.h>
 #include <String.h>
 //
 // -- Limb Constructor
@@ -19,13 +20,13 @@ void Body::setup(String bodyName) {
     //
     // -- create limbs
     frontRightLimb = Limb();
-    frontRightLimb.setup( name + "-frontRightLimb", servoPinFrontRightWrist, servoPinFrontRightElbow, servoPinFrontRightShoulder );
+    frontRightLimb.setup( name + "-frontRightLimb", servoChannelFrontRightWrist, servoChannelFrontRightElbow, servoChannelFrontRightShoulder );
 //  frontLeftLimb = Limb();
-//  frontLeftLimb.setup( name + "-frontLeftLimb", servoPinFrontLeftWrist, servoPinFrontLeftElbow, servoPinFrontLeftShoulder );
+//  frontLeftLimb.setup( name + "-frontLeftLimb", servoChannelFrontLeftWrist, servoChannelFrontLeftElbow, servoChannelFrontLeftShoulder );
 //  backRightLimb = Limb();
-//  backRightLimb.setup( name + "-backRightLimb", servoPinBackRightWrist, servoPinBackRightElbow, servoPinBackRightShoulder );
+//  backRightLimb.setup( name + "-backRightLimb", servoChannelBackRightWrist, servoChannelBackRightElbow, servoChannelBackRightShoulder );
 //  backLeftLimb = Limb();
-//  backLeftLimb.setup( name + "-backLeftLimb", servoPinBackLeftWrist, servoPinBackLeftElbow, servoPinBackLeftShoulder );  
+//  backLeftLimb.setup( name + "-backLeftLimb", servoChannelBackLeftWrist, servoChannelBackLeftElbow, servoChannelBackLeftShoulder );  
 };
 //
 // ====================================================================================================

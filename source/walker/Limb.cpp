@@ -3,7 +3,8 @@
 #include "Constants.h"
 #include "Joint.h"
 #include "Limb.h"
-#include <Servo.h>
+#include <VarSpeedServo.h>
+//#include <Servo.h>
 #include <String.h>
 //
 // -- Limb Constructor
@@ -11,18 +12,18 @@ Limb::Limb() {};
 //
 // ====================================================================================================
 // -- Limb setup
-void Limb::setup(String limbName, int limbServoPinWrist, int limbServoPinElbow, int limbServoPinShoulder) {
+void Limb::setup(String limbName, int limbservoChannelWrist, int limbservoChannelElbow, int limbservoChannelShoulder) {
   //
   // -- initialize state
   name = limbName;
   //
   // -- create joints
   wrist = Joint();
-  wrist.setup( limbName + "-wrist", limbServoPinWrist, WRIST_ANGLE_MIN, WRIST_ANGLE_MAX );
+  wrist.setup( limbName + "-wrist", limbservoChannelWrist, WRIST_ANGLE_MIN, WRIST_ANGLE_MAX );
   elbow = Joint();
-  elbow.setup( limbName + "-elbow", limbServoPinElbow, ELBOW_ANGLE_MIN, ELBOW_ANGLE_MAX );
+  elbow.setup( limbName + "-elbow", limbservoChannelElbow, ELBOW_ANGLE_MIN, ELBOW_ANGLE_MAX );
   shoulder = Joint();
-  shoulder.setup( limbName + "-shoulder", limbServoPinShoulder, SHOULDER_ANGLE_MIN, SHOULDER_ANGLE_MAX );
+  shoulder.setup( limbName + "-shoulder", limbservoChannelShoulder, SHOULDER_ANGLE_MIN, SHOULDER_ANGLE_MAX );
 };
 //
 // ====================================================================================================
