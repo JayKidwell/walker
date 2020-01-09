@@ -9,6 +9,18 @@ int ServoPin = 11;
 // -- force resistor on pin 0
 int fsrAnalogPin = 0;
 //
+// -- servo min and max values
+int forceMin = 0;
+int forceMax = 1023;
+//
+// -- servo min and max values
+int serverMin = 40;
+int serverMax = 240;
+//
+// -- noise filter depth
+int filterWeight = 5;
+int filteredInput = 0;
+//
 // -- Arduino calls this setup method once when the device initializes
 void setup() {
   //
@@ -27,20 +39,28 @@ void setup() {
 //
 // -- Arduino calls loop repeatedly
 void loop() {
-  int fsrReading;
   //
   // -- begin a pass through the loop
-  Serial.print(", loop:" + String( loopCnt ));
+  // Serial.print(", loop:" + String( loopCnt ));
   //
   // -- read in analog value from force resister and output do monitor
-  fsrReading = analogRead(fsrAnalogPin);
-  Serial.print(", Analog reading: ");
-  Serial.print(fsrReading);
+  int forceInput = analogRead(fsrAnalogPin);
+  Serial.print(forceInput);
+  //
+  // -- noise filter
+  filteredInput = ((filteredInput * filterWeight) + forceInput)/(filterWeight+1);
+  Serial.print(",");
+  Serial.print(filteredInput);
+  //
+  // -- weight the input
+  //long filteredInput = ( (long)filteredInput * (long)filteredInput ) / (long)1048576;
   //
   // -- convert reading 0-1023 to output 0-255, and write servo position
   int ServoPosition;
-  ServoPosition = map(fsrReading, 0, 1023, 0, 255);
-  Serial.print(", ServoPosition: ");
+  ServoPosition = map((int)filteredInput, forceMin, forceMax, serverMin, serverMax);
+  ServoPosition = constrain( ServoPosition, serverMin, serverMax );
+  
+  Serial.print(",");
   Serial.print(ServoPosition);
   //
   // LED gets brighter the harder you press
