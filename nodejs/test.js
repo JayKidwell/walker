@@ -6,7 +6,19 @@ const port = 3000;
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World, ' + myexec() );
+
+  var url = req.url;
+  if(url ==='/create') {
+      res.write('creating... , ' + myexec() );
+      res.end(); 
+   } else if(url ==='/contact') {
+      res.write('contact...'); 
+      res.end(); 
+   } else {
+      res.write('other...'); 
+      res.end(); 
+   }
+
   
 });
 
