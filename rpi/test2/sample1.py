@@ -5,7 +5,7 @@ from time import sleep
 #
 def main():
     """
-        Main function to run the servo test..
+        Main function to run the servo test...
     """
     kit = ServoKit(channels=16)
     # Sweep servo on channel 0
