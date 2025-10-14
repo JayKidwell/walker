@@ -32,13 +32,11 @@ def main():
     """
     #
     # -- setup logging
+    import os
+    log_level = os.getenv("LOG_LEVEL", "DEBUG").upper()
     logging.basicConfig(
-        # level=logging.INFO,
-        level=logging.DEBUG,
-        # level=logging.WARNING,
-        # level=logging.ERROR,
-        # level=logging.CRITICAL,
-        format='%(asctime)s - %(levelname)s - %(message)s'
+        level=getattr(logging, log_level, logging.DEBUG),
+        format='%(asctime)s - %(levelname)s - %(message)s' 
     )
     logging.debug("Debugging details") 
     #
@@ -51,7 +49,7 @@ def main():
     # wiggle(kit, 3)
     #
     layFlat(kit)
-    # stand(kit)
+    stand(kit)
     return
 #
 #
