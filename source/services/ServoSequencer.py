@@ -68,6 +68,9 @@ class ServoSequencer:
         Returns:
             List of (timestamp, servo_channel, angle) tuples
         """
+
+        print(f"generate_sine_sequence: channel={servo_channel}, duration={duration}, center={center}, amplitude={amplitude}")
+
         num_frames = int(duration * self.frame_rate)
         sequence = []
         
@@ -81,7 +84,9 @@ class ServoSequencer:
             
             # Clamp to safe servo limits
             angle = max(self.servo_min, min(self.servo_max, angle))
-            
+
+            print(f"Sequence {frame}: {angle}")
+
             sequence.append((t, servo_channel, angle))
         
         return sequence
