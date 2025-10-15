@@ -11,7 +11,7 @@ import threading
 from adafruit_servokit import ServoKit
 
 
-class PreciseServoSequencer:
+class ServoSequencer:
     """
     Executes pre-computed servo sequences with drift-compensated timing
     and optional real-time thread priority.

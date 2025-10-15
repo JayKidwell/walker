@@ -8,7 +8,7 @@ with different frequencies on separate servo channels.
 from typing import List, Tuple, Dict
 import signal
 import sys
-from precise_servo_sequencer import PreciseServoSequencer
+from services.ServoSequencer import ServoSequencer
 
 
 # Configuration constants
@@ -42,7 +42,7 @@ class ConcurrentSineDemo:
         self.channels = channels
         self.center = center
         self.amplitude = amplitude
-        self.sequencer = PreciseServoSequencer(channels=16, frame_rate=frame_rate)
+        self.sequencer = ServoSequencer(channels=16, frame_rate=frame_rate)
         self.threads: List = []
         self.stop_flags: List[Dict[str, bool]] = []
         
