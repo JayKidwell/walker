@@ -43,13 +43,13 @@ def main():
     # -- setup servokit   
     kit = ServoKit(channels=16)
     #
-    # wiggle(kit, 0)
-    # wiggle(kit, 1)
-    # wiggle(kit, 2)
-    # wiggle(kit, 3)
+    #wiggle(kit, 0)
+    #wiggle(kit, 1)
+    #wiggle(kit, 2)
+    wiggle(kit, 3)
     #
     layFlat(kit)
-    stand(kit)
+    # stand(kit)
     return
 #
 #
