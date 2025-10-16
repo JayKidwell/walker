@@ -14,9 +14,14 @@ from services.ServoSequencer import ServoSequencer
 # Configuration constants
 FRAME_RATE = 60
 # All 4 legs - leg[0]: 0,1,2  leg[1]: 4,5,6  leg[2]: 8,9,10  leg[3]: 12,13,14
-SERVO_CHANNELS = [4, 5, 6]
-SEQUENCE_DURATIONS = [3.0, 3.0, 3.0]
+
+# SERVO_CHANNELS = [12, 13, 14]
+# SERVO_CHANNELS = [8, 9, 10]
+# SERVO_CHANNELS = [4, 5, 6]
+SERVO_CHANNELS = [0, 1, 2]
 # SERVO_CHANNELS = [0, 1, 2, 4, 5, 6, 8, 9, 10, 12, 13, 14]
+
+SEQUENCE_DURATIONS = [3.0, 3.0, 3.0]
 # SEQUENCE_DURATIONS = [1.0, 2.0, 3.0, 1.0, 2.0, 3.0, 1.0, 2.0, 3.0, 1.0, 2.0, 3.0]
 SERVO_CENTER = 90  # Center position in degrees
 SERVO_AMPLITUDE = 60  # Sweep amplitude in degrees
