@@ -31,8 +31,8 @@ def main():
             GPIO.output(11, GPIO.HIGH) # Set AIN1
             GPIO.output(13, GPIO.LOW)  # Set AIN2
             
-            # Wait 5 seconds
-            time.sleep(5)
+            # Wait
+            time.sleep(1)
             
             logging.info(f"Cycle {cycle + 1}/100 - Running counter-clockwise")
             
@@ -40,8 +40,8 @@ def main():
             GPIO.output(11, GPIO.LOW)  # Set AIN1
             GPIO.output(13, GPIO.HIGH) # Set AIN2
             
-            # Wait 5 seconds
-            time.sleep(5)
+            # Wait
+            time.sleep(1)
         
         logging.info("Completed 100 cycles")
 
