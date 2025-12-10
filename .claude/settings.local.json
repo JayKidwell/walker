@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(dir \"C:\\git\\walker\" /B)"
+      "Bash(dir \"C:\\git\\walker\" /B)",
+      "Bash(dir:*)",
+      "Bash(git mv:*)",
+      "Bash(move buttons.py button_driver.py)",
+      "Bash(move motor_controller.py motor_driver.py)"
     ],
     "deny": [],
     "ask": []
