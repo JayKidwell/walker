@@ -5,7 +5,6 @@ Provides a reusable interface for controlling DC motors via DRV8833 driver chip.
 Supports multiple motor instances with configurable GPIO pins.
 """
 
-import time
 import RPi.GPIO as GPIO
 
 
@@ -63,33 +62,23 @@ class MotorController:
 
             self._initialized = True
 
-    def forward(self, speed=50):
+    def forward(self):
         """
-        Run motor in forward direction (clockwise).
-
-        Args:
-            speed (int): Motor speed from 0-100 (default 50)
-
-        PWM: AIN1=speed%, AIN2=0%
+        Run motor in forward direction (clockwise) at 50% speed.
+        AIN1=50% PWM, AIN2=0%
         """
-        speed = max(0, min(100, speed))  # Clamp speed to 0-100 range
-        self.pwm1.ChangeDutyCycle(speed)
+        self.pwm1.ChangeDutyCycle(50)
         self.pwm2.ChangeDutyCycle(0)
-        print(f"[DEBUG] Forward: GPIO{self.ain1_gpio}={speed}% PWM, GPIO{self.ain2_gpio}=0%")
+        print(f"[DEBUG] Forward: GPIO{self.ain1_gpio}=50% PWM, GPIO{self.ain2_gpio}=0%")
 
-    def reverse(self, speed=50):
+    def reverse(self):
         """
-        Run motor in reverse direction (counter-clockwise).
-
-        Args:
-            speed (int): Motor speed from 0-100 (default 50)
-
-        PWM: AIN1=0%, AIN2=speed%
+        Run motor in reverse direction (counter-clockwise) at 50% speed.
+        AIN1=0%, AIN2=50% PWM
         """
-        speed = max(0, min(100, speed))  # Clamp speed to 0-100 range
         self.pwm1.ChangeDutyCycle(0)
-        self.pwm2.ChangeDutyCycle(speed)
-        print(f"[DEBUG] Reverse: GPIO{self.ain1_gpio}=0%, GPIO{self.ain2_gpio}={speed}% PWM")
+        self.pwm2.ChangeDutyCycle(50)
+        print(f"[DEBUG] Reverse: GPIO{self.ain1_gpio}=0%, GPIO{self.ain2_gpio}=50% PWM")
 
     def stop(self):
         """
@@ -108,65 +97,6 @@ class MotorController:
         self.pwm1.ChangeDutyCycle(100)
         self.pwm2.ChangeDutyCycle(100)
         print(f"[DEBUG] Brake: GPIO{self.ain1_gpio}=100%, GPIO{self.ain2_gpio}=100%")
-
-    def execute_sequence(self, steps):
-        """
-        Execute a sequence of motor commands.
-
-        Each step in the sequence is executed for a specified duration.
-
-        Args:
-            steps (list): List of step dictionaries, each containing:
-                - 'action' (str): The action to perform ('forward', 'reverse', 'stop')
-                - 'duration_ms' (int): Duration in milliseconds to execute the action
-                - 'speed' (int, optional): Speed 0-100 for 'forward'/'reverse' actions (default 50)
-
-        Example:
-            sequence = [
-                {'action': 'forward', 'duration_ms': 1000, 'speed': 75},
-                {'action': 'stop', 'duration_ms': 500},
-                {'action': 'reverse', 'duration_ms': 1000, 'speed': 60},
-                {'action': 'stop', 'duration_ms': 500}
-            ]
-            motor.execute_sequence(sequence)
-
-        Raises:
-            ValueError: If an unknown action is specified
-        """
-        # Map action names to methods
-        action_map = {
-            'forward': self.forward,
-            'reverse': self.reverse,
-            'stop': self.stop
-        }
-
-        print(f"[DEBUG] Starting sequence with {len(steps)} steps")
-
-        for i, step in enumerate(steps):
-            action = step.get('action')
-            duration_ms = step.get('duration_ms', 0)
-            speed = step.get('speed', 50)
-
-            if action not in action_map:
-                raise ValueError(f"Unknown action '{action}'. Valid actions: {list(action_map.keys())}")
-
-            # Build debug message
-            if action in ['forward', 'reverse']:
-                print(f"[DEBUG] Step {i+1}/{len(steps)}: {action} at {speed}% for {duration_ms}ms")
-            else:
-                print(f"[DEBUG] Step {i+1}/{len(steps)}: {action} for {duration_ms}ms")
-
-            # Execute the action with speed parameter for forward/reverse
-            if action in ['forward', 'reverse']:
-                action_map[action](speed=speed)
-            else:
-                action_map[action]()
-
-            # Wait for the specified duration
-            if duration_ms > 0:
-                time.sleep(duration_ms / 1000.0)
-
-        print("[DEBUG] Sequence complete")
 
     def cleanup(self):
         """
