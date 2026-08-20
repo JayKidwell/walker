@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESC Motor Control</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #1a1a2e;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .panel {
+            background: #16213e;
+            border-radius: 16px;
+            padding: 40px 32px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 1.4rem;
+            margin-bottom: 32px;
+            color: #e0e0e0;
+        }
+
+        /* Speed slider section */
+        .speed-section {
+            margin-bottom: 32px;
+        }
+
+        .speed-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            color: #a0a0b0;
+        }
+
+        .speed-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #4fc3f7;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 12px;
+            border-radius: 6px;
+            background: #0f3460;
+            outline: none;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #4fc3f7;
+            cursor: pointer;
+            border: 3px solid #1a1a2e;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #4fc3f7;
+            cursor: pointer;
+            border: 3px solid #1a1a2e;
+        }
+
+        /* Toggle button section */
+        .toggle-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .toggle-label {
+            font-size: 0.95rem;
+            color: #a0a0b0;
+        }
+
+        .toggle-btn {
+            width: 160px;
+            height: 56px;
+            border-radius: 28px;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .toggle-btn.off {
+            background: #c62828;
+            color: #fff;
+        }
+
+        .toggle-btn.on {
+            background: #2e7d32;
+            color: #fff;
+        }
+
+        /* Status bar */
+        .status {
+            margin-top: 24px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="panel">
+        <h1>ESC Motor Control</h1>
+
+        <div class="speed-section">
+            <div class="speed-label">
+                <span>Speed</span>
+                <span class="speed-value" id="speedDisplay">0%</span>
+            </div>
+            <input type="range" id="speedSlider" min="0" max="100" value="0" step="1">
+        </div>
+
+        <div class="toggle-section">
+            <span class="toggle-label">Motor Power</span>
+            <button class="toggle-btn off" id="toggleBtn" onclick="toggleMotor()">OFF</button>
+        </div>
+
+        <div class="status" id="status">Connecting...</div>
+    </div>
+
+    <script>
+        const slider = document.getElementById("speedSlider");
+        const speedDisplay = document.getElementById("speedDisplay");
+        const toggleBtn = document.getElementById("toggleBtn");
+        const statusEl = document.getElementById("status");
+
+        let motorEnabled = false;
+        let debounceTimer = null;
+
+        // Fetch current status on page load
+        fetch("/status")
+            .then(r => r.json())
+            .then(data => {
+                applyState(data);
+                statusEl.textContent = "Connected";
+            })
+            .catch(() => {
+                statusEl.textContent = "Connection failed";
+            });
+
+        // Slider input -- debounced to avoid flooding the ESP32
+        slider.addEventListener("input", () => {
+            speedDisplay.textContent = `${slider.value}%`;
+            if (debounceTimer) {
+                clearTimeout(debounceTimer);
+            }
+            debounceTimer = setTimeout(() => {
+                fetch(`/speed?value=${slider.value}`)
+                    .then(r => r.json())
+                    .then(data => applyState(data))
+                    .catch(() => statusEl.textContent = "Request failed");
+            }, 100);
+        });
+
+        function toggleMotor() {
+            const newState = motorEnabled ? "off" : "on";
+            fetch(`/toggle?state=${newState}`)
+                .then(r => r.json())
+                .then(data => applyState(data))
+                .catch(() => statusEl.textContent = "Request failed");
+        }
+
+        function applyState(data) {
+            motorEnabled = data.enabled;
+            slider.value = data.speed;
+            speedDisplay.textContent = `${data.speed}%`;
+
+            if (motorEnabled) {
+                toggleBtn.textContent = "ON";
+                toggleBtn.className = "toggle-btn on";
+            } else {
+                toggleBtn.textContent = "OFF";
+                toggleBtn.className = "toggle-btn off";
+            }
+        }
+    </script>
+</body>
+</html>
